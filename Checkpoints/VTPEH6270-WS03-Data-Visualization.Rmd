@@ -1,0 +1,405 @@
+---
+title: "VTPEH 6270 - Data Wrangling and Visualization"
+subtitle: ""
+author: "Naiya Patel"
+date: "`r Sys.Date()`"
+editor_options:
+  chunk_output_type: console
+output:
+  html_document:
+    toc: true
+    toc_depth: 1
+    number_sections: true
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+# Introduction
+
+We will use the [CDC Malaria data](https://data.cdc.gov/Global-Health/Number-of-Reported-Malaria-Cases-by-County-United-/puzh-5wax/about_data), and the [CDC Social Vulnerability Index (SVI) data](https://www.atsdr.cdc.gov/place-health/php/svi/svi-data-documentation-download.html).
+
+```{r, results='hide'}
+
+data_malaria = read.csv("Data/Number_of_Reported_Malaria_Cases_by_County__United_States__2017_20250120.csv")
+data_svi = read.csv("Data/SVI_2016_US_county.csv")
+
+```
+
+# Merging data sets
+
+## Uniformizing variable names
+
+Check variables are labelled the same way. If not, uniformize. 
+
+```{r, results='hide'}
+
+colnames(data_malaria)
+colnames(data_svi)
+
+```
+
+## Uniformizing value codes
+
+Check values are coded the same way. If not, uniformize. 
+
+```{r, results='hide'}
+
+unique(data_malaria$COUNTY)
+unique(data_svi$COUNTY)
+
+data_svi$COUNTY = toupper(data_svi$COUNTY)
+unique(data_svi$COUNTY)
+
+```
+
+## Merging
+
+```{r, results='hide'}
+
+data_merged = merge(data_malaria, data_svi, by = "COUNTY", all.x = T)
+View(data_merged)
+
+data_merged = merge(data_malaria, data_svi, by = c("COUNTY", "STATE"), all.x = T)
+
+```
+
+Check output at each stage!
+
+# Data visualization - Scatter plots
+
+```{r}
+
+library(ggplot2)
+
+```
+
+## Base plot
+
+Plot of county Malaria cases ~ county population.
+Make sure the labels are explicit.
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point()
+
+```
+
+Don't forget to check the missing data. 
+
+Improve...
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = scales::comma
+  ) +
+  labs(
+    x = "County Population",
+    y = "# Malaria Cases"
+  )
+
+```
+
+## Design
+
+For instance, change the theme, and adjust to remove the grid. 
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = scales::comma
+  ) +
+  labs(
+    x = "County Population",
+    y = "# Malaria Cases"
+  ) +
+  theme_bw() +
+  theme(panel.grid = element_blank())
+
+```
+
+## Adding information
+
+We want to know which state each point corresponds to...
+
+How many dimension is that? How can we show it?
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017, colour = STATE)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = scales::comma
+  ) +
+  labs(
+    x = "County Population",
+    y = "# Malaria Cases"
+  ) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+Try something else...
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = scales::comma
+  ) +
+  labs(
+    x = "County Population",
+    y = "# Malaria Cases"
+  ) +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+Improve...
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = scales::comma
+  ) +
+  labs(
+    x = "County Population",
+    y = "# Malaria Cases"
+  ) +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 45, vjust = 0.5)) 
+
+```
+
+Improve...
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = c(0, "1M", "2M", "3M", "4M", "5M")
+  ) +
+  labs(
+    x = "County Population",
+    y = "#Malaria Cases"
+  ) +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+Improve...
+
+```{r, results='hide'}
+
+ggplot(data_merged, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = seq(0, 5)
+  ) +
+  labs(
+    x = "County Population (Million)",
+    y = "# Malaria Cases"
+  ) +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+## Side note - Subsetting data setls
+
+Ok let's focus on the the states with 5 or more counties represented...
+
+```{r, results='hide'}
+
+# Count occurrences
+table(data_merged$STATE)
+
+# Identify the states with 5 or more observations
+which(table(data_merged$STATE) >= 5)
+
+# Find their names
+names(which(table(data_merged$STATE) >= 5))
+
+# Subset from the data frame
+data_merged_sub = data_merged[is.element(data_merged$STATE, 
+                                         names(which(table(data_merged$STATE) >= 5))), ]
+
+```
+
+Check the output...
+
+```{r, results='hide'}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, y = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = seq(0, 5)
+  ) +
+  labs(
+    x = "County Population (Million)",
+    y = "#Malaria Cases"
+  ) +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+## Adding information
+
+We want to add information on the number of people below the poverty estimate...
+
+```{r, results='hide'}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, y = E_POV, size = MAL_FREQ_2017)) +
+  geom_point() +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+Improve...
+
+```{r, results='hide'}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, y = E_POV, size = MAL_FREQ_2017)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = seq(0, 5)
+  ) +
+    scale_y_continuous(
+    breaks = seq(0, 800000, 200000),
+    labels = seq(0, 0.8, 0.2)
+  ) +
+  labs(
+    x = "County Population (Million)",
+    y = "# People Below the Poverty Estimate (Million)"
+  ) +
+  scale_size(name = "#  Malaria Cases") +
+  facet_wrap(STATE ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) 
+
+```
+
+How many dimensions are we working with now?
+
+Think about what it means...
+
+# Data visualization - Distributions
+
+## Base plot
+
+Plot of county population distribution across states.
+
+```{r, results='hide'}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP)) +
+  geom_histogram()
+
+```
+
+## Adding information
+
+```{r, results='hide'}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, fill = STATE)) +
+  geom_histogram()
+
+```
+
+Nope...
+
+```{r}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, y = STATE)) +
+  geom_violin()
+
+```
+
+Works but not very nice...
+
+```{r}
+
+library(ggridges)
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, y = STATE, fill = STATE)) +
+  geom_density_ridges() +
+  theme_ridges() + 
+  theme(legend.position = "none")
+        
+```
+
+Fine tune.
+
+```{r}
+
+ggplot(data_merged_sub, aes(x = E_TOTPOP, y = STATE, fill = STATE)) +
+  geom_density_ridges() +
+    scale_x_continuous(
+    breaks = seq(0, 5000000, 1000000),
+    labels = seq(0, 5)
+  ) +
+    labs(
+    x = "County Population (Million)"
+  ) +
+  theme_ridges() + 
+  theme(legend.position = "none", 
+        axis.title.y = element_blank())
+        
+```
+
+Think about what it means...
+
+# Data visualization - High throughput exploration of high-dimensionality data
+
+Ideally, you should start you project with strong hypotheses regarding associations between variables. But it's not always the case, sometimes there's just too many variables... It can be especially overwhelming when it is not your data. Data visualization is always the best way to get to know your data. 
+
+Let's look at the SVI data set as a whole...
+
+```{r, results='hide'}
+
+library(GGally)
+
+colnames(data_svi)
+
+ggpairs(data_svi[, c("AREA_SQMI", "E_TOTPOP", "E_POV", "E_PCI")]) 
+
+```
+
+# Resources
+
+* [ggplot2 Resources](https://ggplot2.tidyverse.org/)
+* [r-graph-gallery](https://r-graph-gallery.com/)
+* [patchwork Resources](https://patchwork.data-imaginist.com/)
