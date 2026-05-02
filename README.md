@@ -44,19 +44,15 @@ The results show that **no statistically significant association was detected be
 
 ---
 
-## How to Reproduce
+## Shiny App
 
-1. Clone this repository
-2. Install required packages:
-   ```r
-   install.packages(c("tidyverse", "knitr"))
-   ```
-3. Update the `setwd()` path in the Rmd file to your local machine
-4. Open `Final_Report/FinalReport.Rmd` in RStudio and click **Knit**
+An interactive data explorer for the edible_plants dataset is available here:
 
-To launch the Shiny app:
+**[Launch Shiny App](https://your-shinyapp-link.shinyapps.io/VTPEH6270-Naiya)**
+
+To run locally:
 ```r
- https://ncp46.shinyapps.io/Checkpoint7ShinyApp/
+shiny::runApp("ShinyApp/app.R")
 ```
 
 ---
