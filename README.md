@@ -28,10 +28,10 @@ The results show that **no statistically significant association was detected be
 |--------|----------|
 | `Data/` | `edible_plants.csv` — source dataset |
 | `Final_Report/` | `FinalReport.Rmd` and `FinalReport.pdf` — **start here** |
-| `Checkpoints/CP02/` | Checkpoint 2       PDF |
-| `Checkpoints/CP04/` | Checkpoint 4       PDF |
-| `Checkpoints/CP06/` | Checkpoint 6       PDF |
-| `Checkpoints/CP07/` | Checkpoint 7     App.R |
+| `Checkpoints/CP02/` | Checkpoint 2 Rmd + PDF |
+| `Checkpoints/CP04/` | Checkpoint 4 Rmd + PDF |
+| `Checkpoints/CP06/` | Checkpoint 6 Rmd + PDF |
+| `Checkpoints/CP07/` | Checkpoint 7 Rmd + PDF |
 | `ShinyApp/` | `app.R` — interactive data explorer |
 
 ---
@@ -41,6 +41,18 @@ The results show that **no statistically significant association was detected be
 - **Dataset:** edible_plants (TidyTuesday, 2026-02-03)
 - **URL:** https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-02-03/edible_plants.csv
 - **Description:** Observational records on 140 edible plant species including sunlight requirements, water requirements, and other cultivation characteristics.
+
+---
+
+## How to Reproduce
+
+1. Clone this repository
+2. Install required packages:
+   ```r
+   install.packages(c("tidyverse", "knitr"))
+   ```
+3. Update the `setwd()` path in the Rmd file to your local machine
+4. Open `Final_Report/FinalReport.Rmd` in RStudio and click **Knit**
 
 ---
 
