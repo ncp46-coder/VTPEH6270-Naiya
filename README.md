@@ -56,7 +56,7 @@ The results show that **no statistically significant association was detected be
 
 To launch the Shiny app:
 ```r
-shiny::runApp("ShinyApp/app.R")
+ https://ncp46.shinyapps.io/Checkpoint7ShinyApp/
 ```
 
 ---
