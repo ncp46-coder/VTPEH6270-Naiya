@@ -88,11 +88,31 @@ ui <- page_navbar(
       hr(),
       h5("Scientific Context"),
       p("Plants adapted to high-sunlight environments typically experience greater evapotranspiration,
-         increasing their water demand. Shade-tolerant species often grow in environments with higher
-         soil moisture retention, reducing irrigation needs. Understanding whether these traits co-occur
-         has practical implications for companion planting and sustainable garden design.")
-    )
-  ),
+     increasing their water demand. Shade-tolerant species often grow in environments with higher
+     soil moisture retention, reducing irrigation needs. Understanding whether these traits co-occur
+     has practical implications for companion planting and sustainable garden design."),
+      hr(),
+      h5("Data Source"),
+      p("Dataset: TidyTuesday edible_plants (2026-02-03)"),
+      p(tags$a(href = "https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-02-03/edible_plants.csv",
+               "Click here to access the dataset", target = "_blank")),
+      hr(),
+      h5("GitHub Repository"),
+      p(tags$a(href = "https://github.com/ncp46-coder/VTPEH6270-Naiya",
+               "github.com/ncp46-coder/VTPEH6270-Naiya", target = "_blank")),
+      hr(),
+      h5("Author"),
+      p("Naiya Patel | Cornell University | VTPEH 6270 | Spring 2026"),
+      hr(),
+      h5("AI Use Disclosure"),
+      p("This app was produced with assistance from Claude (Anthropic) for the following tasks:"),
+      tags$ul(
+        tags$li("Data cleaning: identifying variables with fewest missing values"),
+        tags$li("Code debugging: contingency table construction and Fisher's Exact Test calls"),
+        tags$li("Formatting: UI layout and Shiny app structure")
+      ),
+      p(em("All analytical decisions, statistical interpretations, and written conclusions are the author's own."))
+    ),
   
   # ── Tab 2: Explore ────────────────────────────────────────────────────────
   nav_panel(
@@ -242,13 +262,18 @@ server <- function(input, output, session) {
       pos <- if (input$plot_type == "fill") "fill" else "dodge"
       y_label <- if (input$plot_type == "fill") "Proportion of Plants" else "Count"
       
-      p <- df %>%
+      plot_data <- df %>%
         count(sunlight_recoded, water_recoded) %>%
         group_by(sunlight_recoded) %>%
-        mutate(prop = n / sum(n)) %>%
-        ggplot(aes(x = sunlight_recoded,
-                   y = if (input$plot_type == "fill") prop else n,
-                   fill = water_recoded)) +
+        mutate(prop = n / sum(n))
+      
+      if (input$plot_type == "fill") {
+        p <- ggplot(plot_data, aes(x = sunlight_recoded, y = prop, fill = water_recoded))
+      } else {
+        p <- ggplot(plot_data, aes(x = sunlight_recoded, y = n, fill = water_recoded))
+      }
+      
+      p <- p +
         geom_col(position = pos, width = 0.7) +
         scale_fill_brewer(palette = "Blues", name = "Water Requirement") +
         labs(title = "Water Requirement by Sunlight Category",
