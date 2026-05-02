@@ -28,10 +28,10 @@ The results show that **no statistically significant association was detected be
 |--------|----------|
 | `Data/` | `edible_plants.csv` — source dataset |
 | `Final_Report/` | `FinalReport.Rmd` and `FinalReport.pdf` — **start here** |
-| `Checkpoints/CP02/` | Checkpoint 2 Rmd + PDF |
-| `Checkpoints/CP04/` | Checkpoint 4 Rmd + PDF |
-| `Checkpoints/CP06/` | Checkpoint 6 Rmd + PDF |
-| `Checkpoints/CP07/` | Checkpoint 7 Rmd + PDF |
+| `Checkpoints/CP02/` | Checkpoint 2 |
+| `Checkpoints/CP04/` | Checkpoint 4 |
+| `Checkpoints/CP06/` | Checkpoint 6 |
+| `Checkpoints/CP07/` | Checkpoint 7 |
 | `ShinyApp/` | `app.R` — interactive data explorer |
 
 ---
