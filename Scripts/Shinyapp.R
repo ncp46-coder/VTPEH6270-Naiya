@@ -23,10 +23,7 @@ dataTableOutput <- DT::dataTableOutput
 renderDataTable <- DT::renderDataTable
 
 # --- 1. Load & Clean Data -----------------------------------------------------
-edible_plants_raw <- read_csv(
-  "/Users/naiyapatel/Desktop/VTPEH6270-Naiya/Checkpoint7ShinyApp/edible_plants copy.csv",
-  show_col_types = FALSE
-)
+edible_plants_raw <- read_csv("edible_plants copy.csv", show_col_types = FALSE)
 
 edible_plants_clean <- edible_plants_raw %>%
   mutate(
