@@ -1,61 +1,43 @@
-# VTPEH6270-Naiya
+VTPEH6270-Naiya
 
-> **Course:** VTPEH 6270 | **Author:** Naiya Patel | **Institution:** Cornell University
+Course: VTPEH 6270 | Author: Naiya Patel | Institution: Cornell University
 
----
 
-## Overview
-
+Overview
 This project is the culmination of what I learned in VTPEH 6270 (Environmental Epidemiology & Public Health) through the exploration of the TidyTuesday edible_plants dataset, which contains observational records on 140 edible plant species and their cultivation requirements.
-
 The analysis investigates one central question:
 
-> Is sunlight requirement associated with water requirement in edible plant species?
+Do edible plant species that require more sunlight tend to have higher water requirements compared to those that tolerate partial shade or full shade?
 
-The results show that **no statistically significant association was detected between sunlight and water requirements** (χ²(4) = 4.35, p = 0.36; Fisher's p = 0.34), though limited sample size in shade-tolerant species reduces the power to detect a true effect.
+The results show that no statistically significant association was detected between sunlight and water requirements (χ²(4) = 4.35, p = 0.36; Fisher's p = 0.34), contrary to the hypothesis that full-sun plants would have higher water demands. Limited sample size in shade-tolerant species (n = 9) reduces the power to detect a true effect.
 
----
+Research Question
 
-## Research Question
+Do edible plant species that require more sunlight tend to have higher water requirements compared to those that tolerate partial shade or full shade?
 
-- Is sunlight requirement associated with water requirement in edible plant species, such that full-sun plants have higher water demands?
+We hypothesize that plants requiring full sun will have higher water requirements, given that greater light exposure drives evapotranspiration and increases plant water demand (Jones, 1992). Shade-tolerant species are expected to have lower water needs as they typically grow in environments with higher soil moisture retention (Larcher, 2003).
 
----
+Repository Contents
+FolderContentsData/edible_plants.csv — source datasetCheckpoints/Checkpoint reports (CP02, CP04, CP06, CP07)Output/Figures/Fig1_sunlight_vs_water.pdf — Nature-formatted figureOutput/Reports/FINAL_REPORT_NAIYA.pdf — final report PDFScripts/FINAL_REPORT_NAIYA.R and Shinyapp.RCheckpoint7ShinyApp/app.R and data for Shiny deployment
 
-## Repository Contents
+Data Source
 
-| Folder | Contents |
-|--------|----------|
-| `Data/` | `edible_plants.csv` — source dataset |
-| `Final_Report/` | `FinalReport.Rmd` and `FinalReport.pdf` — **start here** |
-| `Checkpoints/CP02/` | Checkpoint 2 |
-| `Checkpoints/CP04/` | Checkpoint 4 |
-| `Checkpoints/CP06/` | Checkpoint 6 |
-| `Checkpoints/CP07/` | Checkpoint 7 |
-| `ShinyApp/` | `app.R` — interactive data explorer |
+Dataset: edible_plants (TidyTuesday, 2026-02-03)
+URL: https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-02-03/edible_plants.csv
+Description: Observational records on 140 edible plant species including sunlight requirements, water requirements, and other cultivation characteristics.
 
----
 
-## Data Source
-
-- **Dataset:** edible_plants (TidyTuesday, 2026-02-03)
-- **URL:** https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-02-03/edible_plants.csv
-- **Description:** Observational records on 140 edible plant species including sunlight requirements, water requirements, and other cultivation characteristics.
-
----
-## Shiny App
-
+Shiny App
 An interactive data explorer for the edible_plants dataset is available here:
-
-**[Launch Shiny App](https://ncp46.shinyapps.io/Checkpoint7ShinyApp/)**
-
+Launch Shiny App
 To run locally:
-```r
-shiny::runApp("Checkpoint7ShinyApp/app.R")
-```
+rshiny::runApp("Checkpoint7ShinyApp/app.R")
 
----
+References
+Fisher, R. A. (1922). On the interpretation of chi-square from contingency tables, and the calculation of P. Journal of the Royal Statistical Society, 85(1), 87-94.
+Jones, H. G. (1992). Plants and microclimate: A quantitative approach to environmental plant physiology (2nd ed.). Cambridge University Press.
+Larcher, W. (2003). Physiological plant ecology: Ecophysiology and stress physiology of functional groups (4th ed.). Springer.
+Mock, T. (2026). TidyTuesday: A weekly social data project in R [Data set]. GitHub. https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-02-03/edible_plants.csv
 
-## AI Disclosure
-
+AI Disclosure
 Claude (Anthropic) assisted with data cleaning, code debugging, and formatting. All analytical decisions and interpretations are the author's own.
