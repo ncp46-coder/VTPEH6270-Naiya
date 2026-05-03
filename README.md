@@ -43,28 +43,15 @@ The results show that **no statistically significant association was detected be
 - **Description:** Observational records on 140 edible plant species including sunlight requirements, water requirements, and other cultivation characteristics.
 
 ---
-
-## How to Reproduce
-
-1. Clone this repository
-2. Install required packages:
-   ```r
-   install.packages(c("tidyverse", "knitr"))
-   ```
-3. Update the `setwd()` path in the Rmd file to your local machine
-4. Open `Final_Report/FinalReport.Rmd` in RStudio and click **Knit**
-
----
-
 ## Shiny App
 
 An interactive data explorer for the edible_plants dataset is available here:
 
-**[Launch Shiny App](https://your-shinyapp-link.shinyapps.io/VTPEH6270-Naiya)**
+**[Launch Shiny App](https://ncp46.shinyapps.io/Checkpoint7ShinyApp/)**
 
 To run locally:
 ```r
-shiny::runApp("ShinyApp/app.R")
+shiny::runApp("Checkpoint7ShinyApp/app.R")
 ```
 
 ---
