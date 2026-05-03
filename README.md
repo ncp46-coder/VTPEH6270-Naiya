@@ -1,38 +1,47 @@
-# VTPEH6270-Naiya
+# VTPEH 6270 — Environmental Epidemiology & Public Health
+## Naiya Patel | Cornell University | Spring 2026
 
-> **Course:** VTPEH 6270 | **Author:** Naiya Patel | **Institution:** Cornell University
-
----
-
-## Overview
-
-This project is the culmination of what I learned in VTPEH 6270 (Environmental Epidemiology & Public Health) through the exploration of the TidyTuesday edible_plants dataset, which contains observational records on 140 edible plant species and their cultivation requirements.
-
-The analysis investigates one central question:
-
-> Is sunlight requirement associated with water requirement in edible plant species?
-
-The results show that **no statistically significant association was detected between sunlight and water requirements** (χ²(4) = 4.35, p = 0.36; Fisher's p = 0.34), though limited sample size in shade-tolerant species reduces the power to detect a true effect.
+This repository contains all coursework for VTPEH 6270, including checkpoint analyses and the final report. The project explores associations between environmental and cultivation characteristics in edible plant species using the TidyTuesday edible_plants dataset.
 
 ---
 
-## Research Question
+## Repository Structure
 
-- Is sunlight requirement associated with water requirement in edible plant species, such that full-sun plants have higher water demands?
+```
+VTPEH6270-Naiya/
+│
+├── Data/
+│   └── edible_plants.csv          # Source dataset (TidyTuesday 2026-02-03)
+│
+├── Final_Report/
+│   ├── FinalReport.Rmd            # Main analysis — START HERE
+│   └── FinalReport.pdf            # Rendered output
+│
+├── Checkpoints/
+│   ├── CP02/
+│   │   ├── Checkpoint2.Rmd
+│   │   └── Checkpoint2.pdf
+│   ├── CP04/
+│   │   ├── Checkpoint4.Rmd
+│   │   └── Checkpoint4.pdf
+│   ├── CP06/
+│   │   ├── Checkpoint6.Rmd
+│   │   └── Checkpoint6.pdf
+│   └── CP07/
+│       ├── Checkpoint7.Rmd
+│       └── Checkpoint7.pdf
+│
+└── ShinyApp/
+    └── app.R                      # Interactive data explorer
+```
 
 ---
 
-## Repository Contents
+## Project Description
 
-| Folder | Contents |
-|--------|----------|
-| `Data/` | `edible_plants.csv` — source dataset |
-| `Final_Report/` | `FinalReport.Rmd` and `FinalReport.pdf` — **start here** |
-| `Checkpoints/CP02/` | Checkpoint 2 |
-| `Checkpoints/CP04/` | Checkpoint 4 |
-| `Checkpoints/CP06/` | Checkpoint 6 |
-| `Checkpoints/CP07/` | Checkpoint 7 |
-| `ShinyApp/` | `app.R` — interactive data explorer |
+This project investigates whether **sunlight requirement** is associated with **water requirement** in edible plant species. Using observational data on 140 plant species, the analysis applies a chi-square test of independence and Fisher's Exact Test to evaluate this ecological relationship.
+
+**Key finding:** No statistically significant association was detected between sunlight and water requirements (chi-squared(4) = 4.35, p = 0.36; Fisher's p = 0.34), though the small sample size in shade-tolerant species limits interpretability.
 
 ---
 
@@ -43,19 +52,74 @@ The results show that **no statistically significant association was detected be
 - **Description:** Observational records on 140 edible plant species including sunlight requirements, water requirements, and other cultivation characteristics.
 
 ---
+
+## How to Reproduce the Analysis
+
+### Requirements
+
+- R (>= 4.0)
+- RStudio (recommended for knitting)
+- R packages: `tidyverse`, `knitr`
+
+Install packages if needed:
+
+```r
+install.packages(c("tidyverse", "knitr"))
+```
+
+### Steps
+
+1. Clone this repository:
+   ```
+   git clone https://github.com/ncp46-coder/VTPEH6270-Naiya.git
+   ```
+
+2. Open RStudio and set your working directory to the cloned folder.
+
+3. Place `edible_plants.csv` in the `Data/` folder (or update the `setwd()` path in the Rmd file to match your local path).
+
+4. Open `Final_Report/FinalReport.Rmd` and click **Knit** to reproduce the PDF.
+
+> **Note:** The `setwd()` path in the Rmd files is set to the author's local machine. Update it to your own path before knitting.
+
+---
+
 ## Shiny App
 
-An interactive data explorer for the edible_plants dataset is available here:
-
-**[Launch Shiny App](https://ncp46.shinyapps.io/Checkpoint7ShinyApp/)**
+An interactive data explorer for the edible_plants dataset is available in the `ShinyApp/` folder.
 
 To run locally:
+
 ```r
-shiny::runApp("Checkpoint7ShinyApp/app.R")
+library(shiny)
+shiny::runApp("ShinyApp/app.R")
 ```
 
 ---
 
-## AI Disclosure
+## Checkpoint Overview
 
-Claude (Anthropic) assisted with data cleaning, code debugging, and formatting. All analytical decisions and interpretations are the author's own.
+| Checkpoint | Topic | Key Method |
+|------------|-------|------------|
+| CP02 | Data Exploration | Summary statistics, initial visualization |
+| CP04 | Data Visualization | ggplot2 figures |
+| CP06 | Statistical Analyses | Chi-square test, Fisher's Exact Test |
+| CP07 | *(topic)* | *(method)* |
+| Final Report | Sunlight vs. Water Requirements | Chi-square + Fisher's Exact Test |
+
+---
+
+## AI Use Disclosure
+
+Claude (Anthropic) was used to assist with:
+- Data cleaning: identifying variables with fewest missing values
+- Code formatting and debugging (chi-square table, Fisher's Exact Test)
+- README structure and documentation
+
+All analytical decisions, statistical interpretations, and written conclusions are the author's own.
+
+---
+
+## Contact
+
+**Naiya Patel** | np000@cornell.edu | Cornell University
