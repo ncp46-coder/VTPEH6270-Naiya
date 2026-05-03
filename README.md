@@ -1,47 +1,39 @@
-# VTPEH 6270 — Environmental Epidemiology & Public Health
-## Naiya Patel | Cornell University | Spring 2026
+# VTPEH6270-Naiya
 
-This repository contains all coursework for VTPEH 6270, including checkpoint analyses and the final report. The project explores associations between environmental and cultivation characteristics in edible plant species using the TidyTuesday edible_plants dataset.
-
----
-
-## Repository Structure
-
-```
-VTPEH6270-Naiya/
-│
-├── Data/
-│   └── edible_plants.csv          # Source dataset (TidyTuesday 2026-02-03)
-│
-├── Final_Report/
-│   ├── FinalReport.Rmd            # Main analysis — START HERE
-│   └── FinalReport.pdf            # Rendered output
-│
-├── Checkpoints/
-│   ├── CP02/
-│   │   ├── Checkpoint2.Rmd
-│   │   └── Checkpoint2.pdf
-│   ├── CP04/
-│   │   ├── Checkpoint4.Rmd
-│   │   └── Checkpoint4.pdf
-│   ├── CP06/
-│   │   ├── Checkpoint6.Rmd
-│   │   └── Checkpoint6.pdf
-│   └── CP07/
-│       ├── Checkpoint7.Rmd
-│       └── Checkpoint7.pdf
-│
-└── ShinyApp/
-    └── app.R                      # Interactive data explorer
-```
+> **Course:** VTPEH 6270 | **Author:** Naiya Patel | **Institution:** Cornell University
 
 ---
 
-## Project Description
+## Overview
 
-This project investigates whether **sunlight requirement** is associated with **water requirement** in edible plant species. Using observational data on 140 plant species, the analysis applies a chi-square test of independence and Fisher's Exact Test to evaluate this ecological relationship.
+This project is the culmination of what I learned in VTPEH 6270 (Environmental Epidemiology & Public Health) through the exploration of the TidyTuesday edible_plants dataset, which contains observational records on 140 edible plant species and their cultivation requirements.
 
-**Key finding:** No statistically significant association was detected between sunlight and water requirements (chi-squared(4) = 4.35, p = 0.36; Fisher's p = 0.34), though the small sample size in shade-tolerant species limits interpretability.
+The analysis investigates one central question:
+
+> Do edible plant species that require more sunlight tend to have higher water requirements compared to those that tolerate partial shade or full shade?
+
+The results show that **no statistically significant association was detected** between sunlight and water requirements (χ²(4) = 4.35, p = 0.36; Fisher's p = 0.34), contrary to the hypothesis that full-sun plants would have higher water demands. Limited sample size in shade-tolerant species (n = 9) reduces the power to detect a true effect.
+
+---
+
+## Research Question
+
+> **Do edible plant species that require more sunlight tend to have higher water requirements compared to those that tolerate partial shade or full shade?**
+
+We hypothesize that plants requiring full sun will have higher water requirements, given that greater light exposure drives evapotranspiration and increases plant water demand (Jones, 1992). Shade-tolerant species are expected to have lower water needs as they typically grow in environments with higher soil moisture retention (Larcher, 2003).
+
+---
+
+## Repository Contents
+
+| Folder | Contents |
+|--------|----------|
+| `Data/` | `edible_plants.csv` — source dataset |
+| `Checkpoints/` | Checkpoint reports (CP02, CP04, CP06, CP07) |
+| `Output/Figures/` | `Fig1_sunlight_vs_water.pdf` — Nature-formatted figure |
+| `Output/Reports/` | `FINAL_REPORT_NAIYA.pdf` — final report PDF |
+| `Scripts/` | `FINAL_REPORT_NAIYA.R` and `Shinyapp.R` |
+| `Checkpoint7ShinyApp/` | `app.R` and data for Shiny deployment |
 
 ---
 
@@ -53,73 +45,31 @@ This project investigates whether **sunlight requirement** is associated with **
 
 ---
 
-## How to Reproduce the Analysis
-
-### Requirements
-
-- R (>= 4.0)
-- RStudio (recommended for knitting)
-- R packages: `tidyverse`, `knitr`
-
-Install packages if needed:
-
-```r
-install.packages(c("tidyverse", "knitr"))
-```
-
-### Steps
-
-1. Clone this repository:
-   ```
-   git clone https://github.com/ncp46-coder/VTPEH6270-Naiya.git
-   ```
-
-2. Open RStudio and set your working directory to the cloned folder.
-
-3. Place `edible_plants.csv` in the `Data/` folder (or update the `setwd()` path in the Rmd file to match your local path).
-
-4. Open `Final_Report/FinalReport.Rmd` and click **Knit** to reproduce the PDF.
-
-> **Note:** The `setwd()` path in the Rmd files is set to the author's local machine. Update it to your own path before knitting.
-
----
-
 ## Shiny App
 
-An interactive data explorer for the edible_plants dataset is available in the `ShinyApp/` folder.
+An interactive data explorer for the edible_plants dataset is available here:
+
+**[Launch Shiny App](https://ncp46.shinyapps.io/Checkpoint7ShinyApp/)**
 
 To run locally:
-
 ```r
-library(shiny)
-shiny::runApp("ShinyApp/app.R")
+shiny::runApp("Checkpoint7ShinyApp/app.R")
 ```
 
 ---
 
-## Checkpoint Overview
+## References
 
-| Checkpoint | Topic | Key Method |
-|------------|-------|------------|
-| CP02 | Data Exploration | Summary statistics, initial visualization |
-| CP04 | Data Visualization | ggplot2 figures |
-| CP06 | Statistical Analyses | Chi-square test, Fisher's Exact Test |
-| CP07 | *(topic)* | *(method)* |
-| Final Report | Sunlight vs. Water Requirements | Chi-square + Fisher's Exact Test |
+Fisher, R. A. (1922). On the interpretation of chi-square from contingency tables, and the calculation of P. *Journal of the Royal Statistical Society*, 85(1), 87-94.
 
----
+Jones, H. G. (1992). *Plants and microclimate: A quantitative approach to environmental plant physiology* (2nd ed.). Cambridge University Press.
 
-## AI Use Disclosure
+Larcher, W. (2003). *Physiological plant ecology: Ecophysiology and stress physiology of functional groups* (4th ed.). Springer.
 
-Claude (Anthropic) was used to assist with:
-- Data cleaning: identifying variables with fewest missing values
-- Code formatting and debugging (chi-square table, Fisher's Exact Test)
-- README structure and documentation
-
-All analytical decisions, statistical interpretations, and written conclusions are the author's own.
+Mock, T. (2026). *TidyTuesday: A weekly social data project in R* [Data set]. GitHub. https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-02-03/edible_plants.csv
 
 ---
 
-## Contact
+## AI Disclosure
 
-**Naiya Patel** | np000@cornell.edu | Cornell University
+Claude (Anthropic) assisted with data cleaning, code debugging, and formatting. All analytical decisions and interpretations are the author's own.
